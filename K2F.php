@@ -8,8 +8,9 @@ Author: Christian Sciberras / Keen Advertising Ltd.
 Author URI: http://keen-advertising.com/
 */
 
-	/* Fix wordpress bug */
-	require_once((strpos($_SERVER['PHP_SELF'],'wp-admin')!==false?'../':'').'wp-settings.php'); // wp-includes/pluggable.php
+	/* Fix wordpress bug in loading after framework, framework needs to build on wordpress not thin air */
+	require_once((strpos($_SERVER['PHP_SELF'],'wp-admin')!==false?'../':'').'wp-settings.php');
+	require_once((strpos($_SERVER['PHP_SELF'],'wp-admin')!==false?'../':'').'wp-includes/pluggable.php');
 
 	if(get_option('k2f_enabled',false)){
 		// wordpress headers vs k2f output hotfix

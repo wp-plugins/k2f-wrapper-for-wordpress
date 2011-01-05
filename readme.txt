@@ -31,6 +31,9 @@ the K2F Wrapper Plugin to reflect this path.
 
 == Changelog ==
 
+= 1.4 =
+* Fixed crash in previous version.
+
 = 1.3 =
 * Parameter hotfix can be disarmed.
 * Fixed issue with wordpress not fully loading prior to framework load.
@@ -50,3 +53,6 @@ Previous release was not as flexible. Now supports better management of K2F.
 
 = 1.3 =
 Newer plugins may not run correctly on older version.
+
+= 1.4 =
+Fixed a crash in the previous version (1.4).
