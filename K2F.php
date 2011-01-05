@@ -3,12 +3,13 @@
 Plugin Name: K2F Adapter
 Plugin URI: http://wiki.keen-advertising.com/K2F+Framework
 Description: This is the K2F adapter plugin for WordPress. It allows development and use of K2F-based plugins.
-Version: 1.2
+Version: 1.3
 Author: Christian Sciberras / Keen Advertising Ltd.
 Author URI: http://keen-advertising.com/
 */
 
-	/* Fix wordpress bug */
+	/* Fix wordpress bug in loading after framework, framework needs to build on wordpress not thin air */
+	require_once((strpos($_SERVER['PHP_SELF'],'wp-admin')!==false?'../':'').'wp-settings.php');
 	require_once((strpos($_SERVER['PHP_SELF'],'wp-admin')!==false?'../':'').'wp-includes/pluggable.php');
 
 	if(get_option('k2f_enabled',false)){
