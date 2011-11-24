@@ -2,7 +2,7 @@
 Contributors: Christian Sciberras, Paul Portelli
 Tags: framework, K2F, management, adapter, interface, core
 Requires at least: 2.0.2
-Tested up to: 3.1.0
+Tested up to: 3.2.1
 Stable tag: trunk
 
 K2F is a generic framework for Rapid Application Development (RAD) in PHP.
@@ -19,6 +19,8 @@ This plugin does not contain K2F, you have to download K2F separately.
 
 = Where do I put K2F? =
 
+NOTE: As of v2.0, K2F can be installed automatically within the plugin.
+
 K2F can be put anywhere on the server. It can be shared between different CMSes
 as well as multiple instance of WordPress. You just have to change settings in
 the K2F Wrapper Plugin to reflect this path.
@@ -31,8 +33,11 @@ the K2F Wrapper Plugin to reflect this path.
 
 == Changelog ==
 
+= 2.0 =
+* Added K2F installer/updater.
+
 = 1.5 =
-* Fixed issues when Wordpress was loaded "artificially", by loaidng a plugin file directly.
+* Fixed issues when Wordpress was loaded "artificially", by loading a plugin file directly.
 
 = 1.4 =
 * Fixed crash in previous version.

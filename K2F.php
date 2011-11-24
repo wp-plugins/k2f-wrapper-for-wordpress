@@ -1,16 +1,22 @@
 <?php
 /*
 Plugin Name: K2F Adapter
-Plugin URI: http://wiki.keen-advertising.com/K2F+Framework
+Plugin URI: http://k-2-f.org/
 Description: This is the K2F adapter plugin for WordPress. It allows development and use of K2F-based plugins.
-Version: 1.5
-Author: Christian Sciberras / Keen Advertising Ltd.
-Author URI: http://keen-advertising.com/
+Version: 2.0
+Author: Christian Sciberras / Keen Ltd
+Author URI: http://keen.com.mt/
 */
 
 	/* Fix wordpress bug in loading after framework, framework needs to build on wordpress not thin air */
 	require_once(ABSPATH.'wp-settings.php');
 	require_once(ABSPATH.'wp-includes/pluggable.php');
+	
+	/* Load updater system */
+	$path=substr($_SERVER['DOCUMENT_ROOT'],-1,1)=='/' ? '' : '/';
+	$path=get_option('k2f_path',$_SERVER['DOCUMENT_ROOT'].$path.'K2F/boot.php');
+	define('K2FB', str_replace('boot.php','',$path));
+	require_once(__DIR__.DIRECTORY_SEPARATOR.'update.php');
 
 	if(get_option('k2f_enabled',false)){
 		// wordpress headers vs k2f output hotfix
@@ -78,10 +84,11 @@ Author URI: http://keen-advertising.com/
 		}
 		// show settings form
 		$path=substr($_SERVER['DOCUMENT_ROOT'],-1,1)=='/' ? '' : '/';
-		$path=htmlspecialchars(get_option('k2f_path',$_SERVER['DOCUMENT_ROOT'].$path.'K2F/boot.php'),ENT_QUOTES);
+		$path=htmlspecialchars(get_option('k2f_path',$_SERVER['DOCUMENT_ROOT'].$path.'K2F'.DIRECTORY_SEPARATOR.'boot.php'),ENT_QUOTES);
 		$dbgm=htmlspecialchars(get_option('k2f_debug','none'),ENT_QUOTES);
 		?><div class="wrap">
-			<h2>K2F Wrapper Configuration</h2>
+			<div id="icon-options-general" class="icon32"><br></div>
+			<h2>K2F Settings</h2>
 			<form method="post" action="">
 				<?php wp_nonce_field('update-options'); ?>
 				<table class="form-table">
@@ -106,6 +113,11 @@ Author URI: http://keen-advertising.com/
 						</td>
 					</tr>
 				</table>
+				
+				<div id="icon-tools" class="icon32"><br></div>
+				<h2>K2F Updates</h2>
+				<p><?php K2FU::render(); ?></p>
+		
 				<input type="hidden" name="save" value="1" />
 				<p class="submit">
 					<input type="submit" class="button-primary" value="<?php _e('Save Changes') ?>" />
@@ -126,7 +138,7 @@ Author URI: http://keen-advertising.com/
 		}
 		if(isset($_REQUEST['k2fwrappersaved'])){
 			?><div class="updated fade">
-				<p><strong>K2F Notice:</strong> Changes in K2F configuration have been updated successfully.</p>
+				<p><strong>K2F Notice:</strong> Changes to K2F configuration have been updated successfully.</p>
 			</div><?php
 		}
 	}
